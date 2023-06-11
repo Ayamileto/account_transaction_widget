@@ -14,7 +14,8 @@ def get_filtered_data(data):
     return filtered_list
 
 
-
-
-
-
+def get_sorted_data(data):
+    """ Функция принимает список, сортирует его по ключу в обратном порядке и возвращает 5 последних операций """
+    sorted_list = sorted(data, key=lambda x: x['data'], reverse=True)
+    sliced_list = sorted_list[:5]
+    return sliced_list

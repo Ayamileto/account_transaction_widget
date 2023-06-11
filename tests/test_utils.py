@@ -1,6 +1,6 @@
 import os
 import pytest
-from utils.utils import load_data, get_filtered_data
+from utils.utils import load_data, get_filtered_data, get_sorted_data
 
 
 @pytest.fixture()
@@ -45,6 +45,16 @@ def test_get_filtered_data(testing_data, expected):
         KeyError)
 ])
 def test_get_filtered_dataKeyError(testing_data, expected):
+    """ Тест на ошибку по ключу """
     with pytest.raises(expected):
         get_filtered_data(testing_data)
 
+
+@pytest.mark.parametrize('testing_data, expected', [
+    ([{'data': 3}, {'data': 1}, {'data': 2}, {'data': 7}, {'data': 12}, {'data': 71}, {'data': 20}],
+        [{'data': 71}, {'data': 20}, {'data': 12}, {'data': 7}, {'data': 3}]),
+    ([{'data': 5}, {'data': 2}, {'data': 8}], [{'data': 8}, {'data': 5}, {'data': 2}])
+])
+def test_get_sorted_data(testing_data, expected):
+    """ Тест на проверку корректности сортировки данных по ключу и порядку"""
+    assert get_sorted_data(testing_data) == expected
