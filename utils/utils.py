@@ -8,7 +8,10 @@ def load_data(filename):
     return data
 
 
-
+def get_filtered_data(data):
+    """ Функция фильтрует операции по выполненным и исключает пустые операции"""
+    filtered_list = [operation for operation in data if operation and operation['state'] == 'EXECUTED']
+    return filtered_list
 
 
 
